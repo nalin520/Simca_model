@@ -1,0 +1,41 @@
+{
+  "accuracy": 0.8333333333333334,
+  "n_classes": 10,
+  "classes": [
+    "Actinolite",
+    "Albite",
+    "Axinite-(Fe)",
+    "Baryte",
+    "Beryl",
+    "Danburite",
+    "Diopside",
+    "Enstatite",
+    "Microcline",
+    "Rhodonite"
+  ],
+  "feature_engineering_params": {
+    "include_deriv": true,
+    "include_peak_stats": true,
+    "include_region_ratios": true,
+    "include_pca_features": true,
+    "include_entropy": true,
+    "include_percentiles": true,
+    "include_moments": true
+  },
+  "preprocessing_params": {
+    "normalization": "area",
+    "outlier_percentile": 10.0,
+    "min_samples_per_class": 10,
+    "top_n_classes": 10
+  },
+  "data_info": {
+    "train_samples": 189,
+    "test_samples": 48,
+    "n_features": 2256,
+    "wavenumbers_shape": [
+      619
+    ]
+  },
+  "training_date": "2025-07-15 09:52:54.231837",
+  "model_type": "MultiClassSIMCA"
+}

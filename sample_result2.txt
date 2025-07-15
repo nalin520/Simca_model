@@ -1,0 +1,632 @@
+
+command : python main.py --pickle data/rruff.pkl --mineral_column Name --spectrum_columns Data
+============================================================
+STEP 1: LOADING DATA
+============================================================
+Loading pickle file: data/rruff.pkl
+✓ Pickle file loaded successfully!
+Data type: <class 'pandas.core.frame.DataFrame'>
+DataFrame shape: (7645, 3)
+Columns: ['Name', 'Metadata', 'Data']
+Data types:
+Name        object
+Metadata    object
+Data        object
+dtype: object
+
+============================================================
+STEP 2: EXPLORING DATA STRUCTURE
+============================================================
+
+==================================================
+DETAILED DATA EXPLORATION
+==================================================
+root: pandas DataFrame (7645, 3)
+  Columns: ['Name', 'Metadata', 'Data']
+
+============================================================
+STEP 3: EXTRACTING SPECTRA AND LABELS
+============================================================
+Processing DataFrame-based data...
+✓ Extracted labels from column 'Name': 7645 samples
+✓ Extracted spectra from 1 columns: (7645, 1)
+Detected DataFrame objects in spectra column; extracting intensity arrays...
+✓ Interpolated and converted spectra to array: (7645, 619)
+Could not extract wavenumbers from column names
+✓ Found 231 unique minerals: ['Actinolite' 'Adachiite' 'Adamite' 'Aegirine' 'Aenigmatite' 'Afmite'
+ 'Akermanite' 'Albite' 'Almandine' 'Amblygonite' 'Amesite' 'Analcime'
+ 'Anatase' 'Andalusite' 'Andradite' 'Anglesite' 'Anhydrite' 'Ankerite'
+ 'Annite' 'Anorthite' 'Aragonite' 'Arfvedsonite' 'Arsenopyrite'
+ 'Astrophyllite' 'Atacamite' 'Atelisite-(Y)' 'Augelite' 'Augite'
+ 'Axinite-(Fe)' 'Azurite' 'Baddeleyite' 'Barrerite' 'Barysilite' 'Baryte'
+ 'Bertrandite' 'Beryl' 'Bikitaite' 'Bobdownsite' 'Boleite' 'Braunite'
+ 'Brazilianite' 'Brookite' 'Brucite' 'Bustamite' 'Calcite' 'Cancrinite'
+ 'Carrollite' 'Cassiterite' 'Catapleiite' 'Cechite' 'Celestine' 'Celsian'
+ 'Cerussite' 'Chabazite-Ca' 'Chalcopyrite' 'Chenevixite' 'Chloritoid'
+ 'Chlormayenite' 'Chondrodite' 'Chromatite' 'Chrysoberyl'
+ 'Chukhrovite-(Ca)' 'Clinochlore' 'Clinoenstatite' 'Clinohumite'
+ 'Clinoptilolite-Ca' 'Clinozoisite' 'Colemanite' 'Columbite-(Fe)'
+ 'Cordierite' 'Corundum' 'Covellite' 'Creedite' 'Crocoite'
+ 'Cubic zirconia' 'Cuprite' 'Danburite' 'Datolite' 'Davidlloydite'
+ 'Diamond' 'Diaspore' 'Diopside' 'Dioptase' 'Dolomite' 'Dravite' 'Edenite'
+ 'Edingtonite' 'Elbaite' 'Enstatite' 'Epididymite' 'Epidote' 'Erionite-Ca'
+ 'Erythrite' 'Euclase' 'Eudialyte' 'Fayalite' 'Ferberite'
+ 'Ferro-actinolite' 'Fluor-buergerite' 'Fluor-uvite' 'Fluorapatite'
+ 'Fluorapophyllite-(K)' 'Fluorite' 'Fluoro-richterite' 'Fluorophlogopite'
+ 'Forsterite' 'Gahnite' 'Galuskinite' 'Gaspeite' 'Gaylussite' 'Gehlenite'
+ 'Gmelinite-Na' 'Goethite' 'Grossular' 'Grunerite' 'Gypsum' 'Hardystonite'
+ 'Hausmannite' 'Hauyne' 'Hedenbergite' 'Heklaite' 'Hemimorphite'
+ 'Heulandite-Ca' 'Hubnerite' 'Hughesite' 'Humite' 'Huntite'
+ 'Hydroxylbastnasite-(Ce)' 'Ilvaite' 'Inderite' 'Inyoite' 'Jacobsite'
+ 'Jadeite' 'Kanoite' 'Kazanskyite' 'Kornerupine' 'Kurnakovite'
+ 'Kutnohorite' 'Kyanite' 'Laumontite' 'Laverovite' 'Lawsonite' 'Lazulite'
+ 'Lecoqite-(Y)' 'Legrandite' 'Leucophanite' 'Ludlamite'
+ 'Magnesio-hastingsite' 'Magnesiotaaffeite-6N3S' 'Magnesite' 'Magnetite'
+ 'Marialite' 'Meionite' 'Mesolite' 'Metatorbernite' 'Microcline'
+ 'Mimetite' 'Minium' 'Monazite-(Ce)' 'Montebrasite' 'Monticellite'
+ 'Muscovite' 'Natrolite' 'Nepheline' 'Olivenite' 'Olmiite' 'Orthoclase'
+ 'Painite' 'Paravauxite' 'Partheite' 'Pectolite' 'Pharmacosiderite'
+ 'Phenakite' 'Phillipsite-Ca' 'Plumbophyllite' 'Polylithionite' 'Pyrite'
+ 'Pyromorphite' 'Pyrope' 'Pyrosmalite-(Fe)' 'Quartz' 'Rhodizite'
+ 'Rhodochrosite' 'Rhodonite' 'Riebeckite' 'Rutile' 'Sanbornite'
+ 'Scheelite' 'Scholzite' 'Scolecite' 'Senegalite' 'Serandite' 'Shortite'
+ 'Siderite' 'Silicon' 'Sinoite' 'Smithsonite' 'Sodalite' 'Spessartine'
+ 'Sphalerite' 'Spinel' 'Spodumene' 'Staurolite' 'Stellerite' 'Stilbite-Ca'
+ 'Strontianite' 'Strontiohurlbutite' 'Sulphur' 'Talc' 'Thomsonite-Ca'
+ 'Tilleyite' 'Titanite' 'Topaz' 'Tremolite' 'Trilithionite' 'Triplite'
+ 'Vanadinite' 'Vayrynenite' 'Vesuvianite' 'Vivianite' 'Vladimirivanovite'
+ 'Volaschioite' 'Wavellite' 'Weloganite' 'Whewellite' 'Whitlockite'
+ 'Witherite' 'Wulfenite' 'Xenotime-(Y)' 'Zircon' 'Zoisite']
+
+Sample distribution:
+  Actinolite: 114 samples
+  Adachiite: 2 samples
+  Adamite: 36 samples
+  Aegirine: 48 samples
+  Aenigmatite: 30 samples
+  Afmite: 2 samples
+  Akermanite: 24 samples
+  Albite: 134 samples
+  Almandine: 42 samples
+  Amblygonite: 36 samples
+  Amesite: 12 samples
+  Analcime: 30 samples
+  Anatase: 12 samples
+  Andalusite: 108 samples
+  Andradite: 48 samples
+  Anglesite: 42 samples
+  Anhydrite: 36 samples
+  Ankerite: 24 samples
+  Annite: 51 samples
+  Anorthite: 84 samples
+  Aragonite: 40 samples
+  Arfvedsonite: 24 samples
+  Arsenopyrite: 24 samples
+  Astrophyllite: 66 samples
+  Atacamite: 24 samples
+  Atelisite-(Y): 6 samples
+  Augelite: 24 samples
+  Augite: 66 samples
+  Axinite-(Fe): 204 samples
+  Azurite: 48 samples
+  Baddeleyite: 48 samples
+  Barrerite: 18 samples
+  Barysilite: 12 samples
+  Baryte: 168 samples
+  Bertrandite: 18 samples
+  Beryl: 120 samples
+  Bikitaite: 36 samples
+  Bobdownsite: 12 samples
+  Boleite: 6 samples
+  Braunite: 36 samples
+  Brazilianite: 72 samples
+  Brookite: 36 samples
+  Brucite: 12 samples
+  Bustamite: 38 samples
+  Calcite: 86 samples
+  Cancrinite: 12 samples
+  Carrollite: 12 samples
+  Cassiterite: 48 samples
+  Catapleiite: 66 samples
+  Cechite: 2 samples
+  Celestine: 36 samples
+  Celsian: 32 samples
+  Cerussite: 102 samples
+  Chabazite-Ca: 24 samples
+  Chalcopyrite: 6 samples
+  Chenevixite: 6 samples
+  Chloritoid: 54 samples
+  Chlormayenite: 2 samples
+  Chondrodite: 24 samples
+  Chromatite: 2 samples
+  Chrysoberyl: 19 samples
+  Chukhrovite-(Ca): 1 samples
+  Clinochlore: 12 samples
+  Clinoenstatite: 6 samples
+  Clinohumite: 18 samples
+  Clinoptilolite-Ca: 24 samples
+  Clinozoisite: 48 samples
+  Colemanite: 6 samples
+  Columbite-(Fe): 36 samples
+  Cordierite: 54 samples
+  Corundum: 22 samples
+  Covellite: 36 samples
+  Creedite: 24 samples
+  Crocoite: 58 samples
+  Cubic zirconia: 6 samples
+  Cuprite: 12 samples
+  Danburite: 60 samples
+  Datolite: 48 samples
+  Davidlloydite: 2 samples
+  Diamond: 24 samples
+  Diaspore: 36 samples
+  Diopside: 186 samples
+  Dioptase: 24 samples
+  Dolomite: 66 samples
+  Dravite: 72 samples
+  Edenite: 42 samples
+  Edingtonite: 36 samples
+  Elbaite: 84 samples
+  Enstatite: 107 samples
+  Epididymite: 36 samples
+  Epidote: 138 samples
+  Erionite-Ca: 6 samples
+  Erythrite: 24 samples
+  Euclase: 24 samples
+  Eudialyte: 36 samples
+  Fayalite: 36 samples
+  Ferberite: 66 samples
+  Ferro-actinolite: 12 samples
+  Fluor-buergerite: 12 samples
+  Fluor-uvite: 12 samples
+  Fluorapatite: 144 samples
+  Fluorapophyllite-(K): 36 samples
+  Fluorite: 30 samples
+  Fluoro-richterite: 24 samples
+  Fluorophlogopite: 48 samples
+  Forsterite: 108 samples
+  Gahnite: 6 samples
+  Galuskinite: 2 samples
+  Gaspeite: 6 samples
+  Gaylussite: 18 samples
+  Gehlenite: 16 samples
+  Gmelinite-Na: 24 samples
+  Goethite: 6 samples
+  Grossular: 78 samples
+  Grunerite: 6 samples
+  Gypsum: 46 samples
+  Hardystonite: 6 samples
+  Hausmannite: 6 samples
+  Hauyne: 18 samples
+  Hedenbergite: 48 samples
+  Heklaite: 1 samples
+  Hemimorphite: 18 samples
+  Heulandite-Ca: 96 samples
+  Hubnerite: 42 samples
+  Hughesite: 4 samples
+  Humite: 30 samples
+  Huntite: 9 samples
+  Hydroxylbastnasite-(Ce): 12 samples
+  Ilvaite: 24 samples
+  Inderite: 24 samples
+  Inyoite: 24 samples
+  Jacobsite: 8 samples
+  Jadeite: 24 samples
+  Kanoite: 32 samples
+  Kazanskyite: 1 samples
+  Kornerupine: 18 samples
+  Kurnakovite: 36 samples
+  Kutnohorite: 12 samples
+  Kyanite: 36 samples
+  Laumontite: 22 samples
+  Laverovite: 48 samples
+  Lawsonite: 18 samples
+  Lazulite: 48 samples
+  Lecoqite-(Y): 2 samples
+  Legrandite: 18 samples
+  Leucophanite: 18 samples
+  Ludlamite: 24 samples
+  Magnesio-hastingsite: 24 samples
+  Magnesiotaaffeite-6N3S: 4 samples
+  Magnesite: 28 samples
+  Magnetite: 8 samples
+  Marialite: 24 samples
+  Meionite: 12 samples
+  Mesolite: 34 samples
+  Metatorbernite: 24 samples
+  Microcline: 132 samples
+  Mimetite: 36 samples
+  Minium: 1 samples
+  Monazite-(Ce): 24 samples
+  Montebrasite: 108 samples
+  Monticellite: 18 samples
+  Muscovite: 18 samples
+  Natrolite: 54 samples
+  Nepheline: 12 samples
+  Olivenite: 18 samples
+  Olmiite: 18 samples
+  Orthoclase: 24 samples
+  Painite: 12 samples
+  Paravauxite: 30 samples
+  Partheite: 1 samples
+  Pectolite: 72 samples
+  Pharmacosiderite: 12 samples
+  Phenakite: 24 samples
+  Phillipsite-Ca: 24 samples
+  Plumbophyllite: 2 samples
+  Polylithionite: 24 samples
+  Pyrite: 12 samples
+  Pyromorphite: 38 samples
+  Pyrope: 18 samples
+  Pyrosmalite-(Fe): 12 samples
+  Quartz: 12 samples
+  Rhodizite: 6 samples
+  Rhodochrosite: 36 samples
+  Rhodonite: 96 samples
+  Riebeckite: 24 samples
+  Rutile: 12 samples
+  Sanbornite: 18 samples
+  Scheelite: 28 samples
+  Scholzite: 22 samples
+  Scolecite: 48 samples
+  Senegalite: 18 samples
+  Serandite: 36 samples
+  Shortite: 36 samples
+  Siderite: 16 samples
+  Silicon: 6 samples
+  Sinoite: 1 samples
+  Smithsonite: 12 samples
+  Sodalite: 6 samples
+  Spessartine: 14 samples
+  Sphalerite: 24 samples
+  Spinel: 14 samples
+  Spodumene: 24 samples
+  Staurolite: 18 samples
+  Stellerite: 24 samples
+  Stilbite-Ca: 24 samples
+  Strontianite: 18 samples
+  Strontiohurlbutite: 2 samples
+  Sulphur: 36 samples
+  Talc: 42 samples
+  Thomsonite-Ca: 36 samples
+  Tilleyite: 24 samples
+  Titanite: 96 samples
+  Topaz: 54 samples
+  Tremolite: 72 samples
+  Trilithionite: 36 samples
+  Triplite: 6 samples
+  Vanadinite: 12 samples
+  Vayrynenite: 24 samples
+  Vesuvianite: 24 samples
+  Vivianite: 24 samples
+  Vladimirivanovite: 1 samples
+  Volaschioite: 2 samples
+  Wavellite: 18 samples
+  Weloganite: 12 samples
+  Whewellite: 24 samples
+  Whitlockite: 14 samples
+  Witherite: 36 samples
+  Wulfenite: 12 samples
+  Xenotime-(Y): 12 samples
+  Zircon: 12 samples
+  Zoisite: 36 samples
+
+============================================================
+STEP 4: PREPROCESSING DATA
+============================================================
+✓ Savitzky–Golay smoothing applied (win=15, poly=3)
+✓ First-derivative features appended
+✓ Spectra normalized (z-score)
+✓ Variance filter kept 743 informative channels
+✓ Removed classes with <2 samples
+✓ Removed 6874 spectral outliers (>10.0 percentile)
+✓ Final removal of classes with <2 samples after all preprocessing
+
+✓ Preprocessing complete!
+Final dataset: 742 samples, 743 features
+Classes: 103
+Classes used: ['Actinolite', 'Albite', 'Axinite-(Fe)', 'Baryte', 'Beryl', 'Danburite', 'Diopside', 'Enstatite', 'Microcline', 'Rhodonite']
+Train set: 189 samples, Test set: 48 samples
+
+============================================================
+STEP 5: FEATURE ENGINEERING
+============================================================
+WARNING: X_train_fe contains non-finite values. They will be replaced with 0.
+WARNING: X_test_fe contains non-finite values. They will be replaced with 0.
+
+============================================================
+STEP 8: SIMCA GRID SEARCH (hyperparameter tuning)
+============================================================
+X_train_fe shape: (189, 2256), y_train shape: (189,)
+X_test_fe shape: (48, 2256), y_test shape: (48,)
+Unique y_train: ['Actinolite' 'Albite' 'Axinite-(Fe)' 'Baryte' 'Beryl' 'Danburite'
+ 'Diopside' 'Enstatite' 'Microcline' 'Rhodonite']
+Unique y_test: ['Actinolite' 'Albite' 'Axinite-(Fe)' 'Baryte' 'Beryl' 'Danburite'
+ 'Diopside' 'Enstatite' 'Microcline' 'Rhodonite']
+Any NaN in X_train_fe? False
+Any NaN in X_test_fe? False
+Any NaN in y_train? N/A
+Any NaN in y_test? N/A
+Grid search: n_components=0.995, alpha=0.005
+  Fitting model...
+DEBUG: Nh=6 (type <class 'int'>), Nq=14 (type <class 'int'>), df=20 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=9 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=3 (type <class 'int'>), Nq=10 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=2 (type <class 'int'>), Nq=12 (type <class 'int'>), df=14 (type <class 'int'>)
+DEBUG: Nh=3 (type <class 'int'>), Nq=11 (type <class 'int'>), df=14 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=35 (type <class 'int'>), df=43 (type <class 'int'>)
+DEBUG: Nh=11 (type <class 'int'>), Nq=11 (type <class 'int'>), df=22 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=12 (type <class 'int'>), df=20 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=14 (type <class 'int'>), df=19 (type <class 'int'>)
+DEBUG: Nh=9 (type <class 'int'>), Nq=49 (type <class 'int'>), df=58 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=22 (type <class 'int'>), df=28 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=17 (type <class 'int'>), df=23 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=16 (type <class 'int'>), df=21 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=20 (type <class 'int'>), df=24 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=34 (type <class 'int'>), df=41 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=9 (type <class 'int'>), df=16 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=8 (type <class 'int'>), df=14 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=13 (type <class 'int'>), df=19 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=7 (type <class 'int'>), df=11 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=11 (type <class 'int'>), df=19 (type <class 'int'>)
+DEBUG: Nh=12 (type <class 'int'>), Nq=9 (type <class 'int'>), df=21 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=5 (type <class 'int'>), df=11 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=5 (type <class 'int'>), df=12 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=4 (type <class 'int'>), df=10 (type <class 'int'>)
+DEBUG: Nh=11 (type <class 'int'>), Nq=9 (type <class 'int'>), df=20 (type <class 'int'>)
+DEBUG: Nh=15 (type <class 'int'>), Nq=5 (type <class 'int'>), df=20 (type <class 'int'>)
+DEBUG: Nh=9 (type <class 'int'>), Nq=5 (type <class 'int'>), df=14 (type <class 'int'>)
+DEBUG: Nh=9 (type <class 'int'>), Nq=4 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=9 (type <class 'int'>), Nq=4 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=17 (type <class 'int'>), Nq=6 (type <class 'int'>), df=23 (type <class 'int'>)
+DEBUG: Nh=30 (type <class 'int'>), Nq=4 (type <class 'int'>), df=34 (type <class 'int'>)
+DEBUG: Nh=11 (type <class 'int'>), Nq=3 (type <class 'int'>), df=14 (type <class 'int'>)
+DEBUG: Nh=20 (type <class 'int'>), Nq=4 (type <class 'int'>), df=24 (type <class 'int'>)
+DEBUG: Nh=15 (type <class 'int'>), Nq=2 (type <class 'int'>), df=17 (type <class 'int'>)
+DEBUG: Nh=25 (type <class 'int'>), Nq=4 (type <class 'int'>), df=29 (type <class 'int'>)
+DEBUG: Nh=41 (type <class 'int'>), Nq=2 (type <class 'int'>), df=43 (type <class 'int'>)
+DEBUG: Nh=18 (type <class 'int'>), Nq=2 (type <class 'int'>), df=20 (type <class 'int'>)
+DEBUG: Nh=38 (type <class 'int'>), Nq=4 (type <class 'int'>), df=42 (type <class 'int'>)
+DEBUG: Nh=33 (type <class 'int'>), Nq=3 (type <class 'int'>), df=36 (type <class 'int'>)
+DEBUG: Nh=58 (type <class 'int'>), Nq=6 (type <class 'int'>), df=64 (type <class 'int'>)
+DEBUG: Nh=3 (type <class 'int'>), Nq=10 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=9 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=9 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=11 (type <class 'int'>), df=19 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=11 (type <class 'int'>), df=17 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=10 (type <class 'int'>), df=17 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=13 (type <class 'int'>), df=19 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=9 (type <class 'int'>), df=15 (type <class 'int'>)
+DEBUG: Nh=10 (type <class 'int'>), Nq=8 (type <class 'int'>), df=18 (type <class 'int'>)
+DEBUG: Nh=10 (type <class 'int'>), Nq=8 (type <class 'int'>), df=18 (type <class 'int'>)
+DEBUG: Nh=12 (type <class 'int'>), Nq=9 (type <class 'int'>), df=21 (type <class 'int'>)
+DEBUG: Nh=11 (type <class 'int'>), Nq=9 (type <class 'int'>), df=20 (type <class 'int'>)
+DEBUG: Nh=16 (type <class 'int'>), Nq=7 (type <class 'int'>), df=23 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=9 (type <class 'int'>), df=15 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=12 (type <class 'int'>), df=17 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=9 (type <class 'int'>), df=14 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=11 (type <class 'int'>), df=16 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=11 (type <class 'int'>), df=16 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=12 (type <class 'int'>), df=18 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=20 (type <class 'int'>), df=26 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=10 (type <class 'int'>), df=14 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=13 (type <class 'int'>), df=19 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=11 (type <class 'int'>), df=16 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=16 (type <class 'int'>), df=22 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=26 (type <class 'int'>), df=34 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=14 (type <class 'int'>), df=18 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=15 (type <class 'int'>), df=23 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=13 (type <class 'int'>), df=19 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=10 (type <class 'int'>), df=16 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=15 (type <class 'int'>), df=22 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=12 (type <class 'int'>), df=18 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=7 (type <class 'int'>), df=11 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=6 (type <class 'int'>), df=12 (type <class 'int'>)
+DEBUG: Nh=3 (type <class 'int'>), Nq=9 (type <class 'int'>), df=12 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=10 (type <class 'int'>), df=16 (type <class 'int'>)
+DEBUG: Nh=10 (type <class 'int'>), Nq=24 (type <class 'int'>), df=34 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=17 (type <class 'int'>), df=23 (type <class 'int'>)
+DEBUG: Nh=3 (type <class 'int'>), Nq=5 (type <class 'int'>), df=8 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=19 (type <class 'int'>), df=26 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=4 (type <class 'int'>), df=10 (type <class 'int'>)
+DEBUG: Nh=9 (type <class 'int'>), Nq=10 (type <class 'int'>), df=19 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=5 (type <class 'int'>), df=10 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=6 (type <class 'int'>), df=12 (type <class 'int'>)
+DEBUG: Nh=9 (type <class 'int'>), Nq=10 (type <class 'int'>), df=19 (type <class 'int'>)
+DEBUG: Nh=9 (type <class 'int'>), Nq=1 (type <class 'int'>), df=10 (type <class 'int'>)
+DEBUG: Nh=10 (type <class 'int'>), Nq=4 (type <class 'int'>), df=14 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=3 (type <class 'int'>), df=10 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=2 (type <class 'int'>), df=9 (type <class 'int'>)
+DEBUG: Nh=11 (type <class 'int'>), Nq=4 (type <class 'int'>), df=15 (type <class 'int'>)
+DEBUG: Nh=22 (type <class 'int'>), Nq=1 (type <class 'int'>), df=23 (type <class 'int'>)
+DEBUG: Nh=20 (type <class 'int'>), Nq=2 (type <class 'int'>), df=22 (type <class 'int'>)
+DEBUG: Nh=16 (type <class 'int'>), Nq=2 (type <class 'int'>), df=18 (type <class 'int'>)
+DEBUG: Nh=18 (type <class 'int'>), Nq=2 (type <class 'int'>), df=20 (type <class 'int'>)
+DEBUG: Nh=18 (type <class 'int'>), Nq=2 (type <class 'int'>), df=20 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=8 (type <class 'int'>), df=12 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=4 (type <class 'int'>), df=11 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=8 (type <class 'int'>), df=12 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=4 (type <class 'int'>), df=9 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=8 (type <class 'int'>), df=14 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=9 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=7 (type <class 'int'>), df=12 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=11 (type <class 'int'>), df=16 (type <class 'int'>)
+DEBUG: Nh=3 (type <class 'int'>), Nq=10 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=7 (type <class 'int'>), df=11 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=7 (type <class 'int'>), df=11 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=6 (type <class 'int'>), df=12 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=9 (type <class 'int'>), df=15 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=10 (type <class 'int'>), df=16 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=8 (type <class 'int'>), df=14 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=7 (type <class 'int'>), df=12 (type <class 'int'>)
+DEBUG: Nh=11 (type <class 'int'>), Nq=4 (type <class 'int'>), df=15 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=15 (type <class 'int'>), df=22 (type <class 'int'>)
+DEBUG: Nh=13 (type <class 'int'>), Nq=16 (type <class 'int'>), df=29 (type <class 'int'>)
+DEBUG: Nh=9 (type <class 'int'>), Nq=12 (type <class 'int'>), df=21 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=22 (type <class 'int'>), df=28 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=13 (type <class 'int'>), df=19 (type <class 'int'>)
+DEBUG: Nh=9 (type <class 'int'>), Nq=27 (type <class 'int'>), df=36 (type <class 'int'>)
+DEBUG: Nh=14 (type <class 'int'>), Nq=23 (type <class 'int'>), df=37 (type <class 'int'>)
+DEBUG: Nh=10 (type <class 'int'>), Nq=7 (type <class 'int'>), df=17 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=18 (type <class 'int'>), df=26 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=17 (type <class 'int'>), df=25 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=22 (type <class 'int'>), df=30 (type <class 'int'>)
+DEBUG: Nh=13 (type <class 'int'>), Nq=21 (type <class 'int'>), df=34 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=6 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=21 (type <class 'int'>), df=29 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=25 (type <class 'int'>), df=31 (type <class 'int'>)
+DEBUG: Nh=11 (type <class 'int'>), Nq=12 (type <class 'int'>), df=23 (type <class 'int'>)
+DEBUG: Nh=10 (type <class 'int'>), Nq=20 (type <class 'int'>), df=30 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=8 (type <class 'int'>), df=14 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=19 (type <class 'int'>), df=27 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=20 (type <class 'int'>), df=25 (type <class 'int'>)
+DEBUG: Nh=12 (type <class 'int'>), Nq=11 (type <class 'int'>), df=23 (type <class 'int'>)
+DEBUG: Nh=13 (type <class 'int'>), Nq=19 (type <class 'int'>), df=32 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=7 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=10 (type <class 'int'>), Nq=16 (type <class 'int'>), df=26 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=18 (type <class 'int'>), df=26 (type <class 'int'>)
+DEBUG: Nh=14 (type <class 'int'>), Nq=11 (type <class 'int'>), df=25 (type <class 'int'>)
+DEBUG: Nh=19 (type <class 'int'>), Nq=17 (type <class 'int'>), df=36 (type <class 'int'>)
+DEBUG: Nh=9 (type <class 'int'>), Nq=16 (type <class 'int'>), df=25 (type <class 'int'>)
+DEBUG: Nh=9 (type <class 'int'>), Nq=19 (type <class 'int'>), df=28 (type <class 'int'>)
+DEBUG: Nh=10 (type <class 'int'>), Nq=15 (type <class 'int'>), df=25 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=8 (type <class 'int'>), df=12 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=7 (type <class 'int'>), df=11 (type <class 'int'>)
+DEBUG: Nh=10 (type <class 'int'>), Nq=17 (type <class 'int'>), df=27 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=12 (type <class 'int'>), df=18 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=12 (type <class 'int'>), df=19 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=10 (type <class 'int'>), df=18 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=7 (type <class 'int'>), df=12 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=24 (type <class 'int'>), df=32 (type <class 'int'>)
+DEBUG: Nh=12 (type <class 'int'>), Nq=12 (type <class 'int'>), df=24 (type <class 'int'>)
+DEBUG: Nh=11 (type <class 'int'>), Nq=11 (type <class 'int'>), df=22 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=13 (type <class 'int'>), df=20 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=6 (type <class 'int'>), df=11 (type <class 'int'>)
+DEBUG: Nh=9 (type <class 'int'>), Nq=22 (type <class 'int'>), df=31 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=17 (type <class 'int'>), df=23 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=17 (type <class 'int'>), df=22 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=12 (type <class 'int'>), df=17 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=10 (type <class 'int'>), df=15 (type <class 'int'>)
+DEBUG: Nh=9 (type <class 'int'>), Nq=18 (type <class 'int'>), df=27 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=13 (type <class 'int'>), df=21 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=11 (type <class 'int'>), df=15 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=14 (type <class 'int'>), df=19 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=7 (type <class 'int'>), df=12 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=12 (type <class 'int'>), df=20 (type <class 'int'>)
+DEBUG: Nh=10 (type <class 'int'>), Nq=14 (type <class 'int'>), df=24 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=8 (type <class 'int'>), df=14 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=7 (type <class 'int'>), df=12 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=6 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=11 (type <class 'int'>), Nq=9 (type <class 'int'>), df=20 (type <class 'int'>)
+DEBUG: Nh=10 (type <class 'int'>), Nq=7 (type <class 'int'>), df=17 (type <class 'int'>)
+DEBUG: Nh=9 (type <class 'int'>), Nq=6 (type <class 'int'>), df=15 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=6 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=11 (type <class 'int'>), Nq=5 (type <class 'int'>), df=16 (type <class 'int'>)
+DEBUG: Nh=16 (type <class 'int'>), Nq=7 (type <class 'int'>), df=23 (type <class 'int'>)
+DEBUG: Nh=15 (type <class 'int'>), Nq=5 (type <class 'int'>), df=20 (type <class 'int'>)
+DEBUG: Nh=12 (type <class 'int'>), Nq=8 (type <class 'int'>), df=20 (type <class 'int'>)
+DEBUG: Nh=12 (type <class 'int'>), Nq=7 (type <class 'int'>), df=19 (type <class 'int'>)
+DEBUG: Nh=18 (type <class 'int'>), Nq=3 (type <class 'int'>), df=21 (type <class 'int'>)
+DEBUG: Nh=24 (type <class 'int'>), Nq=5 (type <class 'int'>), df=29 (type <class 'int'>)
+DEBUG: Nh=23 (type <class 'int'>), Nq=4 (type <class 'int'>), df=27 (type <class 'int'>)
+DEBUG: Nh=13 (type <class 'int'>), Nq=4 (type <class 'int'>), df=17 (type <class 'int'>)
+DEBUG: Nh=14 (type <class 'int'>), Nq=4 (type <class 'int'>), df=18 (type <class 'int'>)
+DEBUG: Nh=28 (type <class 'int'>), Nq=2 (type <class 'int'>), df=30 (type <class 'int'>)
+DEBUG: Nh=34 (type <class 'int'>), Nq=3 (type <class 'int'>), df=37 (type <class 'int'>)
+DEBUG: Nh=43 (type <class 'int'>), Nq=4 (type <class 'int'>), df=47 (type <class 'int'>)
+DEBUG: Nh=23 (type <class 'int'>), Nq=4 (type <class 'int'>), df=27 (type <class 'int'>)
+DEBUG: Nh=21 (type <class 'int'>), Nq=4 (type <class 'int'>), df=25 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=10 (type <class 'int'>), df=17 (type <class 'int'>)
+DEBUG: Nh=2 (type <class 'int'>), Nq=9 (type <class 'int'>), df=11 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=13 (type <class 'int'>), df=19 (type <class 'int'>)
+DEBUG: Nh=2 (type <class 'int'>), Nq=14 (type <class 'int'>), df=16 (type <class 'int'>)
+DEBUG: Nh=2 (type <class 'int'>), Nq=8 (type <class 'int'>), df=10 (type <class 'int'>)
+DEBUG: Nh=2 (type <class 'int'>), Nq=19 (type <class 'int'>), df=21 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=7 (type <class 'int'>), df=14 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=8 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=7 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=12 (type <class 'int'>), df=18 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=10 (type <class 'int'>), df=16 (type <class 'int'>)
+DEBUG: Nh=9 (type <class 'int'>), Nq=4 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=13 (type <class 'int'>), Nq=11 (type <class 'int'>), df=24 (type <class 'int'>)
+DEBUG: Nh=15 (type <class 'int'>), Nq=8 (type <class 'int'>), df=23 (type <class 'int'>)
+DEBUG: Nh=10 (type <class 'int'>), Nq=7 (type <class 'int'>), df=17 (type <class 'int'>)
+DEBUG: Nh=11 (type <class 'int'>), Nq=14 (type <class 'int'>), df=25 (type <class 'int'>)
+DEBUG: Nh=20 (type <class 'int'>), Nq=3 (type <class 'int'>), df=23 (type <class 'int'>)
+DEBUG: Nh=20 (type <class 'int'>), Nq=7 (type <class 'int'>), df=27 (type <class 'int'>)
+DEBUG: Nh=14 (type <class 'int'>), Nq=5 (type <class 'int'>), df=19 (type <class 'int'>)
+DEBUG: Nh=17 (type <class 'int'>), Nq=6 (type <class 'int'>), df=23 (type <class 'int'>)
+DEBUG: Nh=20 (type <class 'int'>), Nq=8 (type <class 'int'>), df=28 (type <class 'int'>)
+DEBUG: Nh=46 (type <class 'int'>), Nq=1 (type <class 'int'>), df=47 (type <class 'int'>)
+DEBUG: Nh=32 (type <class 'int'>), Nq=4 (type <class 'int'>), df=36 (type <class 'int'>)
+DEBUG: Nh=43 (type <class 'int'>), Nq=4 (type <class 'int'>), df=47 (type <class 'int'>)
+DEBUG: Nh=36 (type <class 'int'>), Nq=4 (type <class 'int'>), df=40 (type <class 'int'>)
+DEBUG: Nh=25 (type <class 'int'>), Nq=3 (type <class 'int'>), df=28 (type <class 'int'>)
+DEBUG: Nh=19 (type <class 'int'>), Nq=8 (type <class 'int'>), df=27 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=15 (type <class 'int'>), df=22 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=15 (type <class 'int'>), df=20 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=11 (type <class 'int'>), df=17 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=9 (type <class 'int'>), df=13 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=14 (type <class 'int'>), df=21 (type <class 'int'>)
+DEBUG: Nh=13 (type <class 'int'>), Nq=25 (type <class 'int'>), df=38 (type <class 'int'>)
+DEBUG: Nh=10 (type <class 'int'>), Nq=9 (type <class 'int'>), df=19 (type <class 'int'>)
+DEBUG: Nh=13 (type <class 'int'>), Nq=37 (type <class 'int'>), df=50 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=9 (type <class 'int'>), df=14 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=19 (type <class 'int'>), df=27 (type <class 'int'>)
+DEBUG: Nh=11 (type <class 'int'>), Nq=11 (type <class 'int'>), df=22 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=12 (type <class 'int'>), df=18 (type <class 'int'>)
+DEBUG: Nh=10 (type <class 'int'>), Nq=48 (type <class 'int'>), df=58 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=16 (type <class 'int'>), df=21 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=23 (type <class 'int'>), df=29 (type <class 'int'>)
+DEBUG: Nh=10 (type <class 'int'>), Nq=12 (type <class 'int'>), df=22 (type <class 'int'>)
+DEBUG: Nh=6 (type <class 'int'>), Nq=12 (type <class 'int'>), df=18 (type <class 'int'>)
+DEBUG: Nh=16 (type <class 'int'>), Nq=25 (type <class 'int'>), df=41 (type <class 'int'>)
+DEBUG: Nh=4 (type <class 'int'>), Nq=14 (type <class 'int'>), df=18 (type <class 'int'>)
+DEBUG: Nh=7 (type <class 'int'>), Nq=17 (type <class 'int'>), df=24 (type <class 'int'>)
+DEBUG: Nh=14 (type <class 'int'>), Nq=7 (type <class 'int'>), df=21 (type <class 'int'>)
+DEBUG: Nh=11 (type <class 'int'>), Nq=20 (type <class 'int'>), df=31 (type <class 'int'>)
+DEBUG: Nh=15 (type <class 'int'>), Nq=13 (type <class 'int'>), df=28 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=5 (type <class 'int'>), df=10 (type <class 'int'>)
+DEBUG: Nh=11 (type <class 'int'>), Nq=6 (type <class 'int'>), df=17 (type <class 'int'>)
+DEBUG: Nh=22 (type <class 'int'>), Nq=13 (type <class 'int'>), df=35 (type <class 'int'>)
+DEBUG: Nh=9 (type <class 'int'>), Nq=8 (type <class 'int'>), df=17 (type <class 'int'>)
+DEBUG: Nh=16 (type <class 'int'>), Nq=11 (type <class 'int'>), df=27 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=6 (type <class 'int'>), df=14 (type <class 'int'>)
+DEBUG: Nh=17 (type <class 'int'>), Nq=9 (type <class 'int'>), df=26 (type <class 'int'>)
+DEBUG: Nh=25 (type <class 'int'>), Nq=15 (type <class 'int'>), df=40 (type <class 'int'>)
+DEBUG: Nh=11 (type <class 'int'>), Nq=6 (type <class 'int'>), df=17 (type <class 'int'>)
+DEBUG: Nh=16 (type <class 'int'>), Nq=8 (type <class 'int'>), df=24 (type <class 'int'>)
+DEBUG: Nh=8 (type <class 'int'>), Nq=3 (type <class 'int'>), df=11 (type <class 'int'>)
+DEBUG: Nh=22 (type <class 'int'>), Nq=10 (type <class 'int'>), df=32 (type <class 'int'>)
+DEBUG: Nh=19 (type <class 'int'>), Nq=7 (type <class 'int'>), df=26 (type <class 'int'>)
+DEBUG: Nh=12 (type <class 'int'>), Nq=3 (type <class 'int'>), df=15 (type <class 'int'>)
+DEBUG: Nh=18 (type <class 'int'>), Nq=5 (type <class 'int'>), df=23 (type <class 'int'>)
+DEBUG: Nh=11 (type <class 'int'>), Nq=3 (type <class 'int'>), df=14 (type <class 'int'>)
+DEBUG: Nh=26 (type <class 'int'>), Nq=12 (type <class 'int'>), df=38 (type <class 'int'>)
+DEBUG: Nh=5 (type <class 'int'>), Nq=11 (type <class 'int'>), df=16 (type <class 'int'>)
+  Predicting...
+  acc=0.833
+Best SIMCA params: n_components=0.995, alpha=0.005 (acc=0.833)
+
+============================================================
+STEP 9: EVALUATING BEST SIMCA MODEL
+============================================================
+Test accuracy: 0.833
+
+Per-class accuracy:
+  Actinolite: 0.500 (4 samples)
+  Albite: 1.000 (3 samples)
+  Axinite-(Fe): 0.800 (5 samples)
+  Baryte: 1.000 (9 samples)
+  Beryl: 0.667 (3 samples)
+  Danburite: 1.000 (5 samples)
+  Diopside: 1.000 (7 samples)
+  Enstatite: 0.750 (4 samples)
+  Microcline: 0.000 (3 samples)
+  Rhodonite: 1.000 (5 samples)
+
+Confusion matrix (top confused pairs):
+
+============================================================
+STEP 10: PIPELINE COMPLETE
+============================================================
