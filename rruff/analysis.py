@@ -228,7 +228,7 @@ def run_complete_rruff_simca_analysis(pickle_path,
     X_test_fe = np.nan_to_num(X_test_fe, nan=0.0, posinf=0.0, neginf=0.0)
     # Diagnostics and grid search as before
     print("\n" + "="*60)
-    print("STEP 8: SIMCA GRID SEARCH (hyperparameter tuning)")
+    print("STEP 6: SIMCA GRID SEARCH (hyperparameter tuning)")
     print("="*60)
     print(f"X_train_fe shape: {X_train_fe.shape}, y_train shape: {y_train.shape}")
     print(f"X_test_fe shape: {X_test_fe.shape}, y_test shape: {y_test.shape}")
@@ -244,7 +244,7 @@ def run_complete_rruff_simca_analysis(pickle_path,
         raise RuntimeError("Fewer than 2 classes remain after filtering. Relax min_samples_per_class or top_n_classes.")
     model = simca_grid_search(X_train_fe, y_train, X_test_fe, y_test, wavenumbers=processor.wavenumbers)
     print("\n" + "="*60)
-    print("STEP 9: EVALUATING BEST SIMCA MODEL")
+    print("STEP 7: EVALUATING BEST SIMCA MODEL")
     print("="*60)
     predictions, confidences = model.predict(X_test_fe)
     accuracy = np.mean(predictions == y_test)
@@ -264,7 +264,7 @@ def run_complete_rruff_simca_analysis(pickle_path,
     else:
         plot_confusion_matrix(y_test, predictions, class_labels=unique_labels, top_n=10)
     print("\n" + "="*60)
-    print("STEP 10: SAVING MODEL AND METADATA")
+    print("STEP 8: SAVING MODEL AND METADATA")
     print("="*60)
     
     # Create model metadata
@@ -319,7 +319,7 @@ def run_complete_rruff_simca_analysis(pickle_path,
     print(f"✓ Feature engineering parameters saved to: {fe_params_filename}")
     
     print("\n" + "="*60)
-    print("STEP 11: PIPELINE COMPLETE")
+    print("STEP 9: PIPELINE COMPLETE")
     print("="*60)
     print(f"Model and all metadata saved successfully!")
     print(f"To load and use the model later:")

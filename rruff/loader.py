@@ -645,4 +645,115 @@ class RRUFFDataProcessor:
         plt.tight_layout()
         plt.savefig("sample_spectra.png", dpi=300, bbox_inches="tight")
         plt.show()
+    
+    def parse_enlighten_csv(csv_str: str) -> dict:
+    """
+    Parse ENLIGHTEN spectrometer CSV string data
+    
+    Parameters:
+    -----------
+    csv_str : str
+        Raw CSV string from ENLIGHTEN spectrometer
+        
+    Returns:
+    --------
+    result : dict
+        Dictionary containing:
+        - 'metadata': dict of header parameters
+        - 'wavenumbers': array of wavenumbers
+        - 'intensities': array of processed intensities
+    """
+    lines = csv_str.split('\r\n')
+    metadata = {}
+    data_start = None
+    
+    # Parse metadata header
+    for i, line in enumerate(lines):
+        if line.startswith('Pixel,Wavelength,Wavenumber,Processed'):
+            data_start = i + 1
+            break
+        if ',' in line:
+            key, value = line.split(',', 1)
+            metadata[key.strip()] = value.strip()
+    
+    # Parse spectral data
+    wavenumbers = []
+    intensities = []
+    for line in lines[data_start:]:
+        if not line or ',' not in line:
+            continue
+        parts = line.split(',')
+        try:
+            if len(parts) >= 4:
+                wavenumbers.append(float(parts[2]))
+                intensities.append(float(parts[3]))
+        except ValueError:
+            continue
+    
+    return {
+        'metadata': metadata,
+        'wavenumbers': np.array(wavenumbers),
+        'intensities': np.array(intensities)
+    }
+
+def create_training_dataset(csv_data: dict, label: str) -> pd.DataFrame:
+    """
+    Create training dataset from parsed CSV data
+    
+    Parameters:
+    -----------
+    csv_data : dict
+        Dictionary from parse_enlighten_csv
+    label : str
+        Mineral class label
+        
+    Returns:
+    --------
+    df : pd.DataFrame
+        DataFrame with wavenumbers as columns and single spectrum row
+    """
+    # Create DataFrame with wavenumber columns
+    wavenumbers = csv_data['wavenumbers']
+    intensities = csv_data['intensities']
+    
+    # Create column names
+    col_names = [f"intensity_{w:.2f}" for w in wavenumbers]
+    
+    # Create single-row DataFrame
+    df = pd.DataFrame([intensities], columns=col_names)
+    df['label'] = label
+    
+    return df
+
+def process_and_combine_csvs(csv_dict: Dict[str, str]) -> pd.DataFrame:
+    """
+    Process multiple CSV strings and combine into training dataset
+    
+    Parameters:
+    -----------
+    csv_dict : dict
+        Dictionary of {filename: csv_str} pairs
+        
+    Returns:
+    --------
+    combined_df : pd.DataFrame
+        Combined training dataset with spectra and labels
+    """
+    all_dfs = []
+    
+    for filename, csv_str in csv_dict.items():
+        try:
+            # Extract label from filename (filename_1, filename_2, etc.)
+            label = filename.rsplit('_', 1)[0]
+            
+            # Parse CSV
+            parsed = parse_enlighten_csv(csv_str)
+            
+            # Create DataFrame for this spectrum
+            df = create_training_dataset(parsed, label)
+            all_dfs.append(df)
+        except Exception as e:
+            print(f"Error processing {filename}: {str(e)}")
+    
+    return pd.concat(all_dfs, ignore_index=True)
         

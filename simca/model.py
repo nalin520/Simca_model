@@ -168,10 +168,10 @@ class MultiClassSIMCA:
         Parameters
         ----------
         n_components : int | float | dict
-            • int   – fixed number of PCs for **every** class  
-            • float – cumulative variance threshold (e.g. 0.95) used as an
+            • int   - fixed number of PCs for **every** class  
+            • float - cumulative variance threshold (e.g. 0.95) used as an
                        *upper* bound, then k is tuned by CV up to that limit  
-            • dict  – explicit {class_label: k}
+            • dict  - explicit {class_label: k}
         alpha        : significance level for each DD-SIMCA model
         cv_max_k     : hard upper bound on PCs to try when using CV
         cv_folds     : number of StratifiedKFold splits in CV
